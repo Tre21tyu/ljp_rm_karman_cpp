@@ -1,0 +1,113 @@
+#+title: Sfml Tutorial
+
+* Defining the window
+We we are using [[https://www.sfml-dev.org/documentation/3.1.0/classsf_1_1RenderWindow.html][sf::RenderWindow]] class to draw our window to the screen
+
+#+begin_src cpp
+sf::RenderWindow window(sf::VideoMode({800, 600}), "bng");
+#+end_src
+
+That line when ran will immedietely render a window to the screen
+
+Any behavior that runs in this window while it's open can defined within a while loop
+
+#+begin_src cpp
+while (window.isOpen()) { /* Behavior goes here */ }
+#+end_src
+
+* Particle initialization
+We define a class particle with with a given position and velocity
+#+begin_src cpp
+// Particle class
+struct Particle {
+    float x, y;    // position
+    float vx, vy;  // velocity (constant here)
+};
+#+end_src
+
+In that same class, we can define a function for how it will move. We'll start with uniform motion in a vaccum.
+- Constant velocity
+- No acceleration
+
+We'll define some function called ~constantVelocity()~ which takes as parameters...
+~Particle& p~ - The address of the particle (because we want to modify it's position /in place/)
+~dt~ - Our time variable. This will relate to the FPS.
+
+#+begin_src cpp
+void constantVelocity(Particle& p, float dt) {}
+#+end_src
+
+Our goal here is to update the position of our particle p with our velocity and time.
+
+We can access the x position of the particle by saying
+~p.x~
+
+.. and y by saying
+~p.y~
+
+This idea is identical similar for velocity (~p.vx~ ~p.vy~)
+
+Each time ~constantVelocity()~ is called, we want to update the position of our particle to be equal to it's velocity * dt.
+
+In other words
+
+\[ \mathbf{x}_f = \mathbf{x}_0 + \mathbf{v} \cdot \Delta t \]
+
+in cpp this looks like
+
+#+begin_src cpp
+p.x = p.x + p.vx + dt;
+#+end_src
+
+Or, to be more concise
+
+#+begin_src cpp
+p.x += p.vx + dt;
+#+end_src
+
+* Animation
+After initializing our particle
+#+begin_src cpp
+Particle p {
+ 300, 400, // x and y positions
+ 100, 0, // x and y velocities
+}
+#+end_src
+
+And our frame rate (60FPS)
+#+begin_src cpp
+const float dt = 1.f / 60.f;
+#+end_src
+
+And we represent our mathmatical particle object as an actual shape that can be drawn on screen in this case a circle ([[https://www.sfml-dev.org/documentation/3.1.0/classsf_1_1CircleShape.html][sf::CircleShape]]) with a diameter of 10px, and fill it with white.
+#+begin_src cpp
+sf::CircleShape = p_shape(10.f);
+p_shape.setFillColor(sf::Color::White);
+#+end_src
+
+We can move on to animation!
+** 1. Update physics
+We move our particle by one timestep
+#+begin_src cpp
+update(p, dt);
+#+end_src
+
+** 2. Sync shapes
+Then we can tell SFML where we want to draw our particle WITHOUT drawing it to the screen. In other words, we sync our shape to our mathematical struct
+#+begin_src cpp
+p_shape.setPosition({p.x}, {p.y});
+#+end_src
+
+** 3. Erase
+Remove everything from the previous frame
+#+begin_src cpp
+window.clear();
+#+end_src
+
+** 4. Render
+We can now draw our particle to the screen
+#+begin_src cpp
+window.draw(p_shape);
+#+end_src
+
+** 5. Repeat

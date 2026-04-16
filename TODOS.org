@@ -12,6 +12,7 @@
 
 ** 󰙲 CPP
 *** Build basic particle simulations
+**** Understanding How we'll be using SFML
 *** Research popular data structs relating above aero topics
 *** Build optimized simulation
 *** Publish
