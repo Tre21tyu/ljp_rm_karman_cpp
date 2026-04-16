@@ -1,0 +1,17 @@
+* TODOS
+** Aerospace
+*** TODO Figure out how to pull NACA data
+[[https://splinecloud.com/repository/AlinaNeh/NACA_airfoil_database/][API]]?
+** Fluid dynamics
+*** TODO Learn [[https://en.wikipedia.org/wiki/K%C3%A1rm%C3%A1n_vortex_street][Karman vortex streets]]
+*** TODO Learn [[https://en.wikipedia.org/wiki/Reynolds_number][Reynolds Numbers]]
+*** TODO Consider starting out with room temperature
+** MISC
+*** NACA airfoil
+*** [[http://airfoiltools.com/airfoil/details?airfoil=naca0021-il][Airfoil tools]]
+
+** 󰙲 CPP
+*** Build basic particle simulations
+*** Research popular data structs relating above aero topics
+*** Build optimized simulation
+*** Publish
