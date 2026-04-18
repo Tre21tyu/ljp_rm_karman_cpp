@@ -65,6 +65,14 @@ Or, to be more concise
 p.x += p.vx + dt;
 #+end_src
 
+So we can now update our function
+#+begin_src cpp
+void updateParticle(Particle& p, float dt) {
+    p.x += p.vx + dt; // Update position in x direction
+    p.y += p.vy + dt; // Update position in y direction
+}
+#+end_src
+
 * Animation
 After initializing our particle
 #+begin_src cpp
